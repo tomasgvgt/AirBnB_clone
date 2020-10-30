@@ -26,11 +26,11 @@ class FileStorage:
             json.dump(json_dict, f)
 
     def reload(self):
-        class_obj = FileStorage.__objects[key]
+        class_obj = FileStorage.__objects
         try:
             with open(FileStorage.__file_path, "r") as f:
                 json_dict = json.load(f)
                 for key, value in json_dict.items():
-                    file_obj = eval(value["__class__"] + "(**value)")
+                    class_obj[key] = eval(value["__class__"] + "(**value)")
         except Exception:
             pass

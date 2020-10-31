@@ -3,12 +3,19 @@ import cmd
 import shlex
 import models
 from models.base_model import BaseModel
+from models.user import User
+from models.state import State
+from models.city import City
+from models.amenity import Amenity
+from models.place import Place
+from models.review import Review
 
 
 class HBNBCommand(cmd.Cmd):
     """
     """
-    name_class = ["BaseModel"]
+    name_class = ["BaseModel", "User", "State", "City", "Amenity",
+    "Place", "Review"]
     prompt = "(hbnb) "
 
     def do_EOF(self, line):
@@ -77,7 +84,6 @@ class HBNBCommand(cmd.Cmd):
         if len(line) == 0:
             for key, value in models.storage.all().items():
                 instances_list.append(str(value))
-                print (key)
             print(instances_list)
             """
             OTHER WAY
@@ -87,29 +93,31 @@ class HBNBCommand(cmd.Cmd):
             if line not in HBNBCommand.name_class:
                 print("** class doesn't exist **")
             else:
-                for key, value in  models.storage.all().items():
-                    if line in key: # OR key.startswith(line)
+                for key, value in models.storage.all().items():
+                    if line in key:  # OR key.startswith(line)
                         instances_list.append(str(value))
                 print(instances_list)
 
     def do_update(self, line):
-        line_arg = line.split()
+        line_arg = shlex.split(line)
         if len(line_arg) < 1:
-            print ("** class name missing **")
+            print("** class name missing **")
         elif line_arg[0] not in HBNBCommand.name_class:
-            print ("** class doesn't exist **")
+            print("** class doesn't exist **")
         elif len(line_arg) < 2:
             print("** instance id missing **")
-        elif "{}.{}".format(line_arg[0], line_arg[1]) not in models.storage.all().keys():
-            print ("** no instance found **")
+        elif "{}.{}".format(
+                line_arg[0], line_arg[1]) not in models.storage.all().keys():
+            print("** no instance found **")
         elif len(line_arg) < 3:
-            print ("** attribute name missing **")
+            print("** attribute name missing **")
         elif len(line_arg) < 4:
-            print ("** value missing **")
+            print("** value missing **")
         else:
             key = line_arg[0] + "." + line_arg[1]
             setattr(models.storage.all()[key], line_arg[2], line_arg[3])
             models.storage.save()
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

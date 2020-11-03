@@ -1,10 +1,11 @@
 #!/usr/bin/python3
-"""new class inherit from BaseModel
+"""Class Amenity:
+inherits from BaseModel
 """
 from models.base_model import BaseModel
 
 
 class Amenity(BaseModel):
-    """Empty name public attribute
+    """Class Amenity.
     """
     name = ""

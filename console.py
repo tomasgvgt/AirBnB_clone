@@ -118,6 +118,30 @@ class HBNBCommand(cmd.Cmd):
             setattr(models.storage.all()[key], line_arg[2], line_arg[3])
             models.storage.save()
 
+    def default(self, line):
+        my_line = line.split(".")
+        if len(my_line) > 1:
+            if my_line[1] == "all()":
+                self.do_all(my_line[0])
+            elif my_line[1] == "count()":
+                if my_line[0] in HBNBCommand.name_class:
+                    count = 0
+                    for key in models.storage.all():
+                        if my_line[0] in key:
+                            count += 1
+                    print (count)
+                else:
+                    print("** class doesn't exist **")
+            elif my_line[1][:5] == "show(" and my_line[1][-1] == ")":
+                class_and_id = my_line[0] + " " + my_line[1][6:-2]
+                self.do_show(class_and_id)
+            elif my_line[1][:8] == "destroy(" and my_line[1][-1] == ")":
+                class_and_id = my_line[0] + " " + my_line[1][9:-2]
+                self.do_destroy(class_and_id)
+            else:
+                print ("*** Unknown syntax: {}".format(line))
+        else:
+            print ("*** Unknown syntax: {}".format(line))
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

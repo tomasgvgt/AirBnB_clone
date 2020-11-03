@@ -129,19 +129,24 @@ class HBNBCommand(cmd.Cmd):
                     for key in models.storage.all():
                         if my_line[0] in key:
                             count += 1
-                    print (count)
+                    print(count)
                 else:
                     print("** class doesn't exist **")
             elif my_line[1][:5] == "show(" and my_line[1][-1] == ")":
-                class_and_id = my_line[0] + " " + my_line[1][6:-2]
+                class_and_id = my_line[0] + " " + my_line[1][5:-1]
                 self.do_show(class_and_id)
             elif my_line[1][:8] == "destroy(" and my_line[1][-1] == ")":
                 class_and_id = my_line[0] + " " + my_line[1][9:-2]
                 self.do_destroy(class_and_id)
+            elif my_line[1][:7] == "update(" and my_line[1][-1] == ")":
+                clid_aux = my_line[1][7:-1].split()
+                """if len(clid_aux) > 2:
+                    class_and_id = my_line[0] + " " + clid_aux[0] + " " + clid_aux[1] + " " + clid_aux[2]
+                    self.do_update(class_and_id)"""
             else:
-                print ("*** Unknown syntax: {}".format(line))
+                print("*** Unknown syntax: {}".format(line))
         else:
-            print ("*** Unknown syntax: {}".format(line))
+            print("*** Unknown syntax: {}".format(line))
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

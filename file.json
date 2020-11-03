@@ -1,9 +1,1 @@
-{
-"User.1c58e5d8-d3c6-487b-a904-8fc7de36d2f7": {
-"id": "1c58e5d8-d3c6-487b-a904-8fc7de36d2f7",
-"created_at": "2020-11-03T12:01:44.748790",
-"updated_at": "2020-11-03T12:01:44.748802",
-"new": "age",
-"__class__": "User"
-}
-}
+{"User.1c58e5d8-d3c6-487b-a904-8fc7de36d2f7": {"updated_at": "2020-11-03T12:01:44.748802", "key": "value", "new": "age", "created_at": "2020-11-03T12:01:44.748790", "__class__": "User", "id": "1c58e5d8-d3c6-487b-a904-8fc7de36d2f7"}}

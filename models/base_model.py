@@ -20,7 +20,6 @@ class BaseModel:
         - each key of this dictionary is an attribute name
         otherwise:
         id and create_at make new instance
-
         """
         if len(kwargs) > 0:
             for key in kwargs:
@@ -50,14 +49,14 @@ class BaseModel:
 
     def save(self):
         """
-        update the current time in 'update_at'
+        Updates the current time in 'update_at'
         """
         self.updated_at = datetime.now()
         models.storage.save()  # REVISAR METODO
 
     def to_dict(self):
         """
-        make a copy and add new data to the dictionary
+        Makes a copy and add new data to the dictionary
         ('create_at', 'update_at')
 
         Returns:
